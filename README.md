@@ -3,7 +3,26 @@ GOTI
 
 Go Template Inheritance
 
-This is a tweak to the template/html package to removing the redefinition error (from template.go) and test (from multi_test.go). This allows you to redefine templates/define blocks in templates.
+This is a tweak to the text/template package to removing the redefinition error (from template.go) and test (from multi_test.go). This allows you to redefine templates/define blocks in templates.
+
+This with a tweaked version of html/template package to use the tweaked text/template allows you to use Inheritance in both packages.
+
+To use replace:
+
+`import ("html/template" )`
+
+With:
+
+`import (template "github.com/d2g/goti/html")`
+
+Or:
+
+`import ("text/template")`
+
+With:
+
+`import (template "github.com/d2g/goti/text")`
+
 
 Although this is not optimal as both blocks get parsed it does work. I'm sure in the long term [This Issue/Change Request/Enhancement/Feature 3812](https://code.google.com/p/go/issues/detail?id=3812) will bring a better solution.
 
