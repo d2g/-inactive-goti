@@ -5,9 +5,9 @@
 package goti_test
 
 import (
+	template "github.com/d2g/goti/text"
 	"log"
 	"os"
-	template "github.com/d2g/goti"
 )
 
 func ExampleTemplate() {

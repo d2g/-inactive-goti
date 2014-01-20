@@ -5,7 +5,7 @@
 package goti_test
 
 import (
-	template "github.com/d2g/goti"
+	template "github.com/d2g/goti/text"
 	"io"
 	"io/ioutil"
 	"log"
