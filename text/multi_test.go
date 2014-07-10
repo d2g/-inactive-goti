@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package goti
+package template
 
 // Tests for mulitple-template parsing and execution.
 
@@ -257,6 +257,18 @@ func TestAddParseTree(t *testing.T) {
 	if b.String() != "broot" {
 		t.Errorf("expected %q got %q", "broot", b.String())
 	}
+}
+
+// Issue 7032
+func TestAddParseTreeToUnparsedTemplate(t *testing.T) {
+	master := "{{define \"master\"}}{{end}}"
+	tmpl := New("master")
+	tree, err := parse.Parse("master", master, "", "", nil)
+	if err != nil {
+		t.Fatalf("unexpected parse err: %v", err)
+	}
+	masterTree := tree["master"]
+	tmpl.AddParseTree("master", masterTree) // used to panic
 }
 
 //func TestRedefinition(t *testing.T) {

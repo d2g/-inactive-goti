@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package goti_test
+package template_test
 
 import (
-	template "github.com/d2g/goti/text"
 	"log"
 	"os"
 	"strings"
+	template "github.com/d2g/goti/text"
 )
 
 // This example demonstrates a custom function to process template text.

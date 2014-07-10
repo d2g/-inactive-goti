@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package goti
+package template
 
 import (
 	"fmt"
@@ -105,7 +105,7 @@ func (t *Template) copy(c *common) *Template {
 // AddParseTree creates a new template with the name and parse tree
 // and associates it with t.
 func (t *Template) AddParseTree(name string, tree *parse.Tree) (*Template, error) {
-	if t.tmpl[name] != nil {
+	if t.common != nil && t.tmpl[name] != nil {
 		return nil, fmt.Errorf("template: redefinition of template %q", name)
 	}
 	nt := t.New(name)
@@ -209,7 +209,7 @@ func (t *Template) associate(new *Template, tree *parse.Tree) (bool, error) {
 			return false, nil
 		}
 		if !oldIsEmpty {
-			//	return false, fmt.Errorf("template: redefinition of template %q", name)
+			//return false, fmt.Errorf("template: redefinition of template %q", name)
 		}
 	}
 	t.tmpl[name] = new

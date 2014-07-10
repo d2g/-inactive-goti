@@ -2,15 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package goti_test
+package template_test
 
 import (
-	template "github.com/d2g/goti/text"
 	"io"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	template "github.com/d2g/goti/text"
 )
 
 // templateFile defines the contents of a template to be stored in a file, for testing.

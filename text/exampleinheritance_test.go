@@ -1,4 +1,4 @@
-package goti_test
+package template_test
 
 import (
 	template "github.com/d2g/goti/text"

@@ -8,10 +8,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	template "github.com/d2g/goti/text"
 	"os"
 	"strings"
 	"testing"
+	template "github.com/d2g/goti/text"
 	"text/template/parse"
 )
 
@@ -1646,6 +1646,38 @@ func TestEmptyTemplate(t *testing.T) {
 	page := Must(New("page").ParseFiles(os.DevNull))
 	if err := page.ExecuteTemplate(os.Stdout, "page", "nothing"); err == nil {
 		t.Fatal("expected error")
+	}
+}
+
+type Issue7379 int
+
+func (Issue7379) SomeMethod(x int) string {
+	return fmt.Sprintf("<%d>", x)
+}
+
+// This is a test for issue 7379: type assertion error caused panic, and then
+// the code to handle the panic breaks escaping. It's hard to see the second
+// problem once the first is fixed, but its fix is trivial so we let that go. See
+// the discussion for issue 7379.
+func TestPipeToMethodIsEscaped(t *testing.T) {
+	tmpl := Must(New("x").Parse("<html>{{0 | .SomeMethod}}</html>\n"))
+	tryExec := func() string {
+		defer func() {
+			panicValue := recover()
+			if panicValue != nil {
+				t.Errorf("panicked: %v\n", panicValue)
+			}
+		}()
+		var b bytes.Buffer
+		tmpl.Execute(&b, Issue7379(0))
+		return b.String()
+	}
+	for i := 0; i < 3; i++ {
+		str := tryExec()
+		const expect = "<html>&lt;0&gt;</html>\n"
+		if str != expect {
+			t.Errorf("expected %q got %q", expect, str)
+		}
 	}
 }
 
