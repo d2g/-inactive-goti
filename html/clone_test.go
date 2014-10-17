@@ -80,9 +80,8 @@ func TestClone(t *testing.T) {
 
 	// Clone t0 as t4. Redefining the "lhs" template should fail.
 	t4 := Must(t0.Clone())
-	// This should now be ok.
-	if _, err := t4.Parse(`{{define "lhs"}} FAIL {{end}}`); err != nil {
-		t.Error(`redefine "lhs": got err want nil`)
+	if _, err := t4.Parse(`{{define "lhs"}} FAIL {{end}}`); err == nil {
+		t.Error(`redefine "lhs": got nil err want non-nil`)
 	}
 
 	// Execute t0.
