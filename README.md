@@ -1,5 +1,6 @@
-GOTI
+This is no longer required as [Go #3812](https://github.com/golang/go/issues/3812) should have resolved this problem.
 ====
+
 
 Go Template Inheritance
 
